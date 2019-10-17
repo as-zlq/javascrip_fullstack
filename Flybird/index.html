@@ -59,6 +59,14 @@
           if (blocksArr.length) {
               for (var i = 0; i< blocksArr.length; i++) {
                 blocksArr[i].moveBlock()
+                var x = baseObj.rectangleCrashExamine(blocksArr[i].downDivWrap, bird.div)
+                var y = baseObj.rectangleCrashExamine(blocksArr[i].upDivWrap, bird.div)
+                var z = bird.div.offsetTop >=390
+                if(x || y || z){
+                    bird.fallSpeed = 0
+                    clearInterval(landTimer)
+                    jsWrapBg.onclick = null
+                }
 
               }
             if (blocksArr[blocksArr.length - 1].downDivWrap.offsetLeft < (450 - blockDistancce) ){
@@ -66,6 +74,11 @@
                 var newBlock = new Block()
                 newBlock.createBlock()
                 blocksArr.push(newBlock)
+            }
+            if (blocksArr[0].downDivWrap.offsetLeft < -50){
+                jsWrapBg.removeChild(blocksArr[0].downDivWrap)
+                jsWrapBg.removeChild(blocksArr[0].upDivWrap)
+                blocksArr.shift(blocksArr[0])
             }
           }
       }
