@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/lesson/lesson",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#48A6FD",
+    "navigationBarTitleText": "菜菜秘籍",
+    "navigationBarTextStyle": "white"
+  },
+
+  "tabBar":{
+    "list":[
+      {
+        "pagePath":"pages/main/main",
+        "text":"如何让菜菜爱我",
+        "iconPath":"images/shouye.png",
+        "selectedIconPath":"images/hover-shouye.png"
+      },
+      {"pagePath":"pages/lesson/lesson",
+        "text":"菜菜为什么爱我",
+        "iconPath":"images/class.png",
+        "selectedIconPath":"images/hover-class.png"
+      },
+      {"pagePath":"pages/mine/mine",
+        "text":"菜菜为什么这么爱我",
+        "iconPath":"images/mine.png"
+      }
+    ]
+
+  },
+  
+  "sitemapLocation": "sitemap.json"
+}

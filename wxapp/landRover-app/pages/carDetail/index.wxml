@@ -1,0 +1,8 @@
+<!--pages/carDetail/index.wxml-->
+<!--Mv VM-->
+<!--view 视图-->
+<!--Model 模型层 提供数据-->
+<view>
+<text>{{ id }}</text>
+
+</view>

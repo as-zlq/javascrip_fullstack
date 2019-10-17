@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- weui的css样式框架引入 -->
+    <link href="https://cdn.bootcss.com/weui/2.1.2/style/weui.min.css" rel="stylesheet">
+    <!-- 淘宝flexble布局引入  会自动将手机屏幕划分为等比的100份 -->
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>猫眼电影</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.js"></script>
+</head>
+<body>
+    <header class="nav">
+        <i class="arrow-left"></i>
+        <span>影片详情</span>
+    </header>
+    <div class="page">
+        <!-- section1 -->
+        <section class="move-header">
+            <div class="movie">
+                <div class="movie-background"></div>
+                <div class="movie-filter"></div>
+                <div class="movie-container">
+                    <div class="movie-cover">
+                        <a href="#" class="link">
+                            <img src="" alt="" id="moviePic">
+                        </a>
+                    </div>
+                    <!-- detail -->
+                    <div class="movie-content">
+                        <div class="movie-name">
+                            <span></span>
+                        </div>
+                        <div class="movie-ename">
+                            <span>dadasda</span>
+                        </div>
+                        <!--star-->
+                        <div class="movie-score">
+                            <div class="released-score">
+                                <div class="rating" id="rating">
+                                    <img src="./images/star.png" alt="">
+                                    <img src="./images/star.png" alt="">
+                                    <img src="./images/star.png" alt="">
+                                    <img src="./images/star.png" alt="">
+                                    <img src="./images/star-h.png" alt="">
+                                    <span class="rating-score">9.7</span>
+                                </div>
+                                <div class="score-num">
+                                    (<span>23665</span>人评分)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <script>
+      (function(){
+          $.ajax({
+              url:'./mock.json',
+              type:'get',
+              success:function(res){
+                  console.log(res)
+                  $('#moviePic').attr('src',res.data.moviePic)
+                  $('.movie-name span').html(res.data.name)
+                  $('.movie-ename span').html(res.data.nameEnglish)
+              }
+          })
+      })()
+    </script>
+</body>
+
+</html>
