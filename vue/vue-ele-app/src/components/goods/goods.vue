@@ -37,8 +37,12 @@
                     <span>好评率{{food.rating}}%</span>
                   </div>
                   <div class="price">
-                    <div class="now">{{food.price}}</div>
-                    <span class="old" v-if="food.oldPrice">{{food.oldPrice}}</span>
+                    <div class="now">￥{{food.price}}</div>
+                    <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
+                  </div>
+                  <div class="cartcontrol-wrapper">
+                    <!-- + -->
+                    <cartcontrol :food="food" @add="addFood"></cartcontrol>
                   </div>
                 </div>
               </li>
@@ -48,15 +52,25 @@
       </div>
     </div>
     <!-- 购物车 -->
-    <shopcart></shopcart>
+    <shopcart
+      :selectFoods="selectFoods"
+      :deliveryPrice="seller.deliveryPrice"
+      :minPrice="seller.minPrice"
+    ></shopcart>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
 import shopcart from '@/components/shopCart/shopcart'
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
 export default {
   name: 'Goods',
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data () {
     return {
       goods: [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -66,7 +80,8 @@ export default {
     }
   },
   components: {
-    'shopcart': shopcart
+    'shopcart': shopcart,
+    'cartcontrol': cartcontrol
   },
   created () {
     this.$http.get('http://localhost:8080/static/goods.json')
@@ -91,6 +106,19 @@ export default {
         }
       }
       return 0
+    },
+    selectFoods () {
+      let foods = []
+      for (let good of this.goods) {
+        if (good.foods) {
+          for (let food of good.foods) {
+            if (food.count) {
+              foods.push(food)
+            }
+          }
+        }
+      }
+      return foods
     }
   },
   methods: {
@@ -124,6 +152,9 @@ export default {
         this.listHeight.push(height)
       }
       console.log(this.listHeight)
+    },
+    addFood () {
+
     }
   }
 }
