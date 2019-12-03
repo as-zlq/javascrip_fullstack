@@ -38,6 +38,13 @@ let getAllusers = function () {
   return allServeices.query(_sql)
 }
 
+//用户登录
+let userLogin = function (username, userpwd) {
+  let _sql = `select * from users where username="${username}" and userpwd="${userpwd}";`
+  return allServeices.query(_sql)
+}
+
 module.exports = {
-  getAllusers
+  getAllusers,
+  userLogin
 }
