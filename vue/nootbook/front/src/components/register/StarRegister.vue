@@ -46,7 +46,18 @@ export default {
           userpwd: this.userpwd.trim()
         }
       })
-      .then((res) => {})
+      .then((res) => {
+        console.log(res)
+        if (res.data.code === '200') {
+          this.$router.push({path: '/StarLogin'})
+        }
+        else {
+          this.$toast(res.data.mess)
+        }
+      })
+    },
+    login () {
+      this.$router.push({path: '/StarLogin'})
     }
   }
 };
