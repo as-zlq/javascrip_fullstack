@@ -4,7 +4,7 @@
       <header>
         <div><van-icon name="wap-nav" size="20px" @click="menu"></van-icon></div>
         <div>
-          <van-icon name="like" size="20px"></van-icon>
+          <van-icon name="like" size="20px" @click="writeNote"></van-icon>
           <van-icon name="search" size="20px"></van-icon>
         </div>
       </header>
@@ -78,6 +78,9 @@ export default {
     },
     noteList (title) {
         this.$router.push({path:'/noteList', query: {'title':title}})
+    },
+    writeNote () {
+        this.$router.push({path: '/publishNote'})
     }
   }
 }

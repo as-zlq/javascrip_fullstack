@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const userServies = require('../controllers/mySqlConfig')
+const utils = require('../controllers/utils')
 
 router.prefix('/users')//路由前缀
 
@@ -150,6 +151,77 @@ router.post('/findNoteListBytype', async(ctx, next) => {
     ctx.body = {
       code: '500',
       data: err,
+    }
+  })
+})
+
+//根据ID查找笔记详情
+router.post('/findNoteDetailById', async(ctx, next) => {
+  let id = ctx.request.body.id
+  await userServies.findNoteDetailById(id)
+  .then(async (res) => {
+    let r = ''
+    if(res.length) {
+      r = 'ok'
+      ctx.body = {
+        code: '200',
+        data: res[0],
+        mess: '查找成功'
+      }
+    }
+    else {
+      r = 'error'
+      ctx.body = {
+        code: '404',
+        data: r,
+        mess: '查找失败'
+      }
+    }
+  })
+  .catch((error) => {
+    ctx.body = {
+      code: '80000',
+      data: error,
+    }
+  })
+})
+
+//发布笔记
+router.post('/insertNote', async(ctx, next) => {
+  let c_time = utils.getNowFromatDate()
+  let m_time = utils.getNowFromatDate()
+  let note_content = ctx.request.body.note_content
+  let head_img = ctx.request.body.head_img
+  let title = ctx.request.body.title
+  let note_type = ctx.request.body.note_type
+  let useId = ctx.request.body.useId
+  console.log(userId)
+  let nickname = ctx.request.body.nickname
+  await userServies.insertNote([c_time,m_time,note_content,head_img,title,note_type,useId,nickname])
+  .then(async(res) => {
+    console.log(res)
+    let r = ''
+    if (res.affectedRows) {
+      r = 'ok'
+      ctx.body = {
+        code: '200',
+        data: r,
+        mess: '发布成功'
+      }
+    }
+    else {
+      r = 'error'
+      ctx.body = {
+        code: '80000',
+        data: err,
+        mess: '发布失败'
+      }
+    }
+  })
+  .catch((err) => {
+    ctx.body = {
+      code: '500',
+      data: error
     }
   })
 })

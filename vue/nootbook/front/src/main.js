@@ -8,6 +8,7 @@ import 'vant/lib/index.css';
 import axios from 'axios'
 import 'amfe-flexible'
 
+
 Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).use(Panel).use(Uploader)
 
 Vue.prototype.$http = axios

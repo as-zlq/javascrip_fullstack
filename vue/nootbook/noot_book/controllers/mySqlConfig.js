@@ -52,7 +52,7 @@ let findUser = function (username) {
 
 //注册用户 将三个实参封装对象
 let insertUser = function (value) {
-  let _sql = `insert into users set username=?,userpwd=?,nickname=?`
+  let _sql = `insert into users set username=?,userpwd=?,nickname=?;`
   return allServeices.query(_sql,value)
 }
 
@@ -62,11 +62,24 @@ let findNoteListBytype = function (note_type) {
   return allServeices.query(_sql)
 }
 
+//根据ID查找对应的笔记详情
+let findNoteDetailById = function (id) {
+  let _sql = `select * from note where id="${id}";`
+  return allServeices.query(_sql)
+}
+
+//发布笔记
+let insertNote = function (options) {
+  let _sql = `insert into note set c_time=?,m_time=?,note_content=?,head_mg=?,title=?,note_type=?,userId=?,nickname=?;`
+  return allServeices.query(_sql,options)
+}
+
 module.exports = {
   getAllusers,
   userLogin,
   findUser,
   insertUser,
-  findNoteListBytype
-
+  findNoteListBytype,
+  findNoteDetailById,
+  insertNote
 }
