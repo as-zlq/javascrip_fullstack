@@ -10,6 +10,8 @@
     </div> -->
     <i-button size="default" ref="sure" @click.native="oSure" @sendMsg="getMsg">确认</i-button>
     <div>{{mess}}</div>
+
+    <div class="button" @click="showToast">toast</div>
   </div>
 </template>
 
@@ -38,6 +40,9 @@ export default {
     },
     getMsg(e) {
       this.mess = e
+    },
+    showToast () {
+      this.$toast('网络异常')
     }
   }
 }

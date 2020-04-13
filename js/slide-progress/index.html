@@ -45,9 +45,11 @@
         body {
             padding: 10px;
         }
+
         .progress1 {
             margin-top: 30px;
         }
+
         .progress2 {
             margin-top: 60px;
         }
@@ -108,35 +110,32 @@
                 this.addEvent();
             }
             addEvent() {
-        this.downX = 0
-        this.buttonLeft = 0
-        this.progressButton.addEventListener('touchstart', (event) => {
-          const touch = event.touches[0]
-          this.downX = touch.clientX
-          this.buttonLeft = parseInt(this.progressButton.style.left || 0, 10)
-        })
-        this.progressButton.addEventListener('touchmove', (event) => {
-          const touch = event.touches[0]
-          const diffX = touch.clientX - this.downX
-          let move = diffX + this.buttonLeft
-          if (move > this.progressBar.offsetWidth) {
-            move = this.progressBar.offsetWidth
-          } else if (move < 0) {
-            move = 0
-          }
-          // 通知回调 执行的
-          this.onProgressChange(
-            (move / this.progressBar.offsetWidth) * 100 + '%'
-          )
-          this.progressButton.style.left = move + 'px'
-          this.progress.style.width = (move / this.progressBar.offsetWidth) * 100 + '%'
-        })
-        this.progressButton.addEventListener('touchend', () => {
+                this.downX = 0
+                this.buttonLeft = 0
+                this.progressButton.addEventListener('touchstart', (event) => {
+                    const touch = event.touches[0]
+                    this.downX = touch.clientX
+                    this.buttonLeft = parseInt(this.progressButton.style.left || 0, 10)
+                })
+                this.progressButton.addEventListener('touchmove', (event) => {
+                    const touch = event.touches[0]
+                    const diffX = touch.clientX - this.downX
+                    let move = diffX + this.buttonLeft
+                    if (move > this.progressBar.offsetWidth) {
+                        move = this.progressBar.offsetWidth
+                    } else if (move < 0) {
+                        move = 0
+                    }
+                    // 通知回调 执行的
+                    this.onProgressChange((move / this.progressBar.offsetWidth) * 100 + '%')
+                    this.progressButton.style.left = move + 'px'
+                    this.progress.style.width = (move / this.progressBar.offsetWidth) * 100 + '%'
+                })
+                this.progressButton.addEventListener('touchend', () => {
 
-        })
-      }
-    }
-
+                })
+            }
+        }
         new Progress('.progress1', {
             onProgressChange: function (persent) {
                 console.log('persent', persent);
